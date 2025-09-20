@@ -1,246 +1,326 @@
-<!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AUXILIO BY @RARE CHEATS</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #000;
-      color: #fff;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    #particles-js {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-    }
-    .panel {
-      position: relative;
-      z-index: 1;
-      background: #111;
-      border-radius: 12px;
-      padding: 18px;
-      width: 90%;
-      max-width: 340px;
-      box-shadow: 0 0 20px rgba(128,0,128,0.5);
-    }
-    h2 {
-      text-align: center;
-      margin: 0 0 8px;
-      font-size: 18px;
-    }
-    .divider {
-      height: 2px;
-      background: #FF0000;
-      margin: 10px 0 15px;
-    }
-    .tabs {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 15px;
-    }
-    .tab {
-      flex: 1;
-      text-align: center;
-      padding: 8px;
-      border-radius: 6px;
-      background: #222;
-      margin: 0 4px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 14px;
-    }
-    .tab.active {
-      background: #FF0000;
-      color: #fff;
-    }
-    .content { display: none; }
-    .content.active { display: block; }
-    label {
-      display: flex;
-      align-items: center;
-      margin: 8px 0;
-      font-size: 14px;
-    }
-    input[type="checkbox"], input[type="radio"] {
-      accent-color: #FF0000;
-      margin-right: 8px;
-      transform: scale(1.2);
-    }
-    /* Slider FOV */
-    input[type="range"] {
-      -webkit-appearance: none;
-      width: 100%;
-      height: 6px;
-      background: #333;
-      border-radius: 3px;
-      outline: none;
-      margin: 10px 0;
-    }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: #FF0000;
-      cursor: pointer;
-      border: none;
-    }
-    input[type="range"]::-moz-range-thumb {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: #FF0000;
-      cursor: pointer;
-      border: none;
-    }
-    select {
-      width: 100%;
-      padding: 6px;
-      border: 2px solid #FF0000;
-      border-radius: 6px;
-      background: #111;
-      color: white;
-      font-size: 14px;
-      margin-bottom: 10px;
-    }
-    .btn {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      margin-top: 18px;
-      text-align: center;
-      border: none;
-      border-radius: 8px;
-      background: #FF0000;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 14px;
-    }
-    .info p {
-      margin: 6px 0;
-      font-size: 14px;
-    }
-  </style>
-</head>
-<body>
-  <div id="particles-js"></div>
-  
-  <div class="panel">
-    <h2>AUXILIO BY @RARE CHEATS</h2>
-    <div class="divider"></div>
-    <div class="tabs">
-      <div class="tab active" onclick="showTab('aimbot', this)">Aimbot</div>
-      <div class="tab" onclick="showTab('info', this)">Info</div>
-    </div>
-    
-    <div id="aimbot" class="content active">
-      <label><input type="checkbox"> Ativar Auxílio</label>
-      <label><input type="checkbox"> Ativar Fov</label>
-      
-      <input type="range" min="0" max="100" value="0" id="fovRange">
-      <p>Fov: <span id="fovValue">0</span></p>
-      
-      <select>
-        <option>Auxilio Head</option>
-        <option>Auxilio Body</option>
-        <option>Auxilio Full</option>
-      </select>
-      
-      <div class="divider"></div>
-      <p>Tipo de Aimbot:</p>
-      <label><input type="radio" name="tipo"> Ao Atirar</label>
-      <label><input type="radio" name="tipo"> Ao Olhar</label>
-    </div>
-    
-    <div id="info" class="content info">
-      <p><b>Dispositivo:</b> <span id="modelo"></span></p>
-      <p><b>Key:</b> <span id="key"></span></p>
-      <div class="divider"></div>
-      <p><b>Dicas:</b> Ative Funções no Treinamento.</p>
-    </div>
-    
-    <button class="btn" onclick="abrirJogo()">INJETAR FUNÇÕES NO JOGO</button>
-  </div>
-  
-  <!-- Script -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script>
-    // Tabs
-    function showTab(id, el) {
-      document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      el.classList.add('active');
-    }
-
-    // Slider
-    const fovRange = document.getElementById("fovRange");
-    const fovValue = document.getElementById("fovValue");
-    fovRange.oninput = function() {
-      fovValue.textContent = this.value;
-    }
-
-    // Detectar dispositivo simplificado
-    function getDeviceName() {
-      const ua = navigator.userAgent;
-      if (/iPhone/i.test(ua)) return "iPhone";
-      if (/iPad/i.test(ua)) return "iPad";
-      if (/Android/i.test(ua)) return "Android";
-      if (/Windows/i.test(ua)) return "Windows";
-      if (/Macintosh/i.test(ua)) return "Mac";
-      return "Desconhecido";
-    }
-    document.getElementById("modelo").textContent = getDeviceName();
-
-    // Key logada (aqui você pode trocar pelo valor que quiser)
-    const keyLogada = "auxiliorarecheats";
-    document.getElementById("key").textContent = keyLogada;
-
-    // Botão
-function abrirJogo() {
-  window.location.href = "https://play.google.com/store/apps/details?id=com.dts.freefireth";
-}
-
-    
-   
-
-    // Partículas (teia azul)
-    particlesJS("particles-js", {
-      "particles": {
-        "number": { "value": 55 },
-        "color": { "value": "#FF0000" },
-        "shape": { "type": "circle" },
-        "opacity": { "value": 0.6 },
-        "size": { "value": 4 },
-        "line_linked": {
-          "enable": true,
-          "distance": 160,
-          "color": "#FF0000",
-          "opacity": 0.6,
-          "width": 1.5
-        },
-        "move": {
-          "enable": true,
-          "speed": 2.5,
-          "direction": "none",
-          "out_mode": "bounce"
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Revendedores - Vibrante</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Montserrat', sans-serif; }
+        .content-hidden { display: none; }
+        .tab-button {
+            flex: 1;
+            padding: 1.25rem 0;
+            text-align: center;
+            font-weight: 600;
+            color: #6b7280;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
         }
-      }
-    });
-  </script>
-</body>
-</html>
-dy>
-</html>
-ml>
+        .tab-button.active {
+            color: #4f46e5;
+            border-color: #4f46e5;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-indigo-100 to-purple-100 flex items-center justify-center min-h-screen p-4">
+
+    <main id="login-section" class="bg-white rounded-3xl shadow-2xl p-8 w-full max-w-sm transform transition-all duration-300 scale-100 hover:scale-105">
+        <h1 class="text-4xl font-bold text-center mb-6 text-indigo-700"><i class="fas fa-magic mr-2"></i> Painel Revenda</h1>
+        <p class="text-center text-gray-500 mb-8">Faça login para começar a gerenciar.</p>
+        <form id="login-form" class="space-y-6">
+            <div>
+                <label for="username" class="block text-sm font-semibold mb-1 text-gray-700">Usuário</label>
+                <input id="username" type="text" class="w-full border border-gray-300 p-3 rounded-xl focus:ring-2 focus:ring-indigo-400 focus:border-transparent outline-none transition duration-200" required>
+            </div>
+            <div>
+                <label for="password" class="block text-sm font-semibold mb-1 text-gray-700">Senha</label>
+                <input id="password" type="password" class="w-full border border-gray-300 p-3 rounded-xl focus:ring-2 focus:ring-indigo-400 focus:border-transparent outline-none transition duration-200" required>
+            </div>
+            <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl hover:bg-indigo-700 transition duration-200 shadow-lg">Entrar</button>
+        </form>
+        <p class="text-center text-gray-500 text-sm mt-4">© 2025 Feito por dionatiz dev</p>
+    </main>
+
+    <main id="dashboard-section" class="content-hidden bg-white rounded-3xl shadow-2xl p-6 w-full max-w-5xl md:p-10">
+        <header class="flex flex-col sm:flex-row justify-between items-center pb-6 mb-6">
+            <h1 class="text-3xl font-bold text-indigo-700 mb-4 sm:mb-0"><i class="fas fa-chart-line mr-2"></i> Dashboard</h1>
+            <div class="flex flex-wrap items-center gap-4">
+                <span id="user-display" class="font-semibold text-gray-700 text-lg"></span>
+                <span id="credits-display" class="px-4 py-2 bg-indigo-100 text-indigo-700 rounded-full font-bold text-sm shadow-sm"></span>
+                <button id="logout-btn" class="bg-red-500 text-white px-4 py-2 rounded-xl hover:bg-red-600 transition duration-200 shadow-md">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Sair
+                </button>
+            </div>
+        </header>
+
+        <nav class="flex border-b border-gray-200 mb-6">
+            <button id="keys-tab-btn" class="tab-button active"><i class="fas fa-key mr-2"></i> Gerar Keys</button>
+            <button id="manage-tab-btn" class="tab-button content-hidden"><i class="fas fa-users-cog mr-2"></i> Gerenciar Revendedores</button>
+        </nav>
+
+        <section id="keys-tab">
+            <h2 class="text-2xl font-bold mb-5 text-gray-700">Criar Nova Key</h2>
+            <form id="create-key-form" class="bg-indigo-50 p-6 rounded-2xl space-y-5 shadow-inner">
+                <label for="validity-days" class="block text-sm font-semibold text-gray-700">Validade (dias)</label>
+                <input type="number" id="validity-days" value="30" min="1" class="w-full border border-indigo-300 p-3 rounded-lg focus:ring-2 focus:ring-indigo-400 focus:border-transparent outline-none transition duration-200">
+                <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-xl font-bold hover:bg-indigo-700 transition duration-200 shadow-md">
+                    <i class="fas fa-plus-circle mr-2"></i> Criar Key
+                </button>
+            </form>
+
+            <h2 class="text-2xl font-bold mt-10 mb-5 text-gray-700">Suas Keys</h2>
+            <div id="keys-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+
+            <section id="api-docs" class="mt-10 p-6 bg-gray-50 rounded-xl border border-gray-200 content-hidden">
+                <h3 class="font-bold text-lg text-gray-700 mb-3"><i class="fas fa-tools mr-2"></i> Ferramentas Avançadas (API)</h3>
+                <p class="text-sm text-gray-600 mb-4">Você pode usar esta API para resetar o vínculo de um dispositivo com a chave de forma programática. Use uma requisição **PUT** para o endpoint abaixo, substituindo `KEY_ID` pelo ID da chave.</p>
+                <div class="bg-gray-100 p-4 rounded-md font-mono text-sm text-gray-800 break-all">
+                    <p class="font-semibold text-gray-600">Endpoint:</p>
+                    <p class="mb-2"><span class="text-red-500 font-bold">PUT</span> https://rare-android-565a4-default-rtdb.firebaseio.com/keys/<span class="text-purple-700">KEY_ID</span>.json</p>
+                    <p class="font-semibold text-gray-600">Corpo da requisição (JSON):</p>
+                    <pre>{
+  "deviceId": null
+}</pre>
+                </div>
+            </section>
+        </section>
+
+        <section id="manage-tab" class="content-hidden">
+            <h2 class="text-2xl font-bold mb-5 text-gray-700">Gerenciar Revendedores</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-blue-50 p-6 rounded-2xl shadow-inner">
+                    <h3 class="font-bold text-lg text-blue-700 mb-3"><i class="fas fa-user-edit mr-2"></i> Editar Revendedor</h3>
+                    <form id="manage-reseller-form" class="space-y-4">
+                        <div>
+                            <label for="reseller-username" class="block text-sm font-semibold text-gray-700">Usuário</label>
+                            <input type="text" id="reseller-username" class="w-full border border-blue-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none">
+                        </div>
+                        <div>
+                            <label for="credit-amount" class="block text-sm font-semibold text-gray-700">Créditos (+ ou -)</label>
+                            <input type="number" id="credit-amount" class="w-full border border-blue-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="can-delete-keys" class="h-4 w-4 text-blue-600 rounded">
+                            <label for="can-delete-keys" class="text-sm font-semibold text-gray-700">Pode Deletar Keys?</label>
+                        </div>
+                        <div>
+                            <label for="device-limit" class="block text-sm font-semibold text-gray-700">Limite de Dispositivos</label>
+                            <input type="number" id="device-limit" value="1" min="1" class="w-full border border-blue-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-transparent outline-none">
+                        </div>
+                        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition duration-200">Atualizar</button>
+                    </form>
+                </div>
+
+                <div class="bg-purple-50 p-6 rounded-2xl shadow-inner">
+                    <h3 class="font-bold text-lg text-purple-700 mb-3"><i class="fas fa-user-plus mr-2"></i> Cadastrar Revendedor</h3>
+                    <form id="new-reseller-form" class="space-y-4">
+                        <div>
+                            <label for="new-reseller-username" class="block text-sm font-semibold text-gray-700">Usuário</label>
+                            <input type="text" id="new-reseller-username" class="w-full border border-purple-300 p-3 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent outline-none">
+                        </div>
+                        <div>
+                            <label for="new-reseller-password" class="block text-sm font-semibold text-gray-700">Senha</label>
+                            <input type="text" id="new-reseller-password" class="w-full border border-purple-300 p-3 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent outline-none">
+                        </div>
+                        <div>
+                            <label for="new-reseller-credits" class="block text-sm font-semibold text-gray-700">Créditos iniciais</label>
+                            <input type="number" id="new-reseller-credits" value="10" min="0" class="w-full border border-purple-300 p-3 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent outline-none">
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="new-can-delete-keys" class="h-4 w-4 text-purple-600 rounded">
+                            <label for="new-can-delete-keys" class="text-sm font-semibold text-gray-700">Pode Deletar Keys?</label>
+                        </div>
+                        <div>
+                            <label for="new-device-limit" class="block text-sm font-semibold text-gray-700">Limite de Dispositivos</label>
+                            <input type="number" id="new-device-limit" value="1" min="1" class="w-full border border-purple-300 p-3 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent outline-none">
+                        </div>
+                        <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-xl font-bold hover:bg-purple-700 transition duration-200">Cadastrar</button>
+                    </form>
+                </div>
+            </div>
+
+            <h2 class="text-2xl font-bold mt-8 mb-5 text-gray-700">Lista de Revendedores</h2>
+            <div id="resellers-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        </section>
+        <div class="border-t border-gray-200 mt-8 pt-4">
+            <p class="text-center text-gray-500 text-sm">© 2025 Feito por dionatiz dev</p>
+        </div>
+    </main>
+
+    <script>
+        const REALTIME_DB_URL = "https://rare-android-565a4-default-rtdb.firebaseio.com";
+
+        const loginSection = document.getElementById("login-section");
+        const dashboardSection = document.getElementById("dashboard-section");
+        const loginForm = document.getElementById("login-form");
+        const logoutBtn = document.getElementById("logout-btn");
+        const userDisplay = document.getElementById("user-display");
+        const creditsDisplay = document.getElementById("credits-display");
+        const createKeyForm = document.getElementById("create-key-form");
+        const keysList = document.getElementById("keys-list");
+        const manageResellerForm = document.getElementById("manage-reseller-form");
+        const newResellerForm = document.getElementById("new-reseller-form");
+        const resellersList = document.getElementById("resellers-list");
+        
+        const keysTabBtn = document.getElementById("keys-tab-btn");
+        const manageTabBtn = document.getElementById("manage-tab-btn");
+        const keysTab = document.getElementById("keys-tab");
+        const manageTab = document.getElementById("manage-tab");
+        const apiDocsSection = document.getElementById("api-docs");
+
+        let currentUser = null;
+        let currentRole = null;
+        let currentCredits = 0;
+        let currentPermissions = {};
+
+        // Adiciona um evento que gera um ID único para o dispositivo
+        const deviceId = localStorage.getItem('deviceId') || Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        localStorage.setItem('deviceId', deviceId);
+
+        loginForm.addEventListener("submit", async e => {
+            e.preventDefault();
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            if (username === "dionatiz" && password === "1010") {
+                currentUser = username;
+                currentRole = "owner";
+                currentCredits = 0;
+                currentPermissions = { deleteKeys: true };
+                loginSection.classList.add("content-hidden");
+                dashboardSection.classList.remove("content-hidden");
+                userDisplay.textContent = `Bem-vindo, ${currentUser}!`;
+                creditsDisplay.textContent = "Dono";
+                manageTabBtn.classList.remove("content-hidden");
+                apiDocsSection.classList.remove("content-hidden");
+                fetchKeys();
+                return;
+            }
+
+            const res = await fetch(`${REALTIME_DB_URL}/resellers/${username}.json`);
+            const data = await res.json();
+
+            if (!data || data.password !== password) {
+                alert("Usuário ou senha inválidos");
+                return;
+            }
+
+            let devices = data.devices || [];
+            const deviceLimit = data.deviceLimit || 1;
+
+            // Se o deviceId atual não estiver na lista E a lista já estiver cheia, bloqueia o login.
+            if (!devices.includes(deviceId) && devices.length >= deviceLimit) {
+                alert(`Limite de dispositivos (${deviceLimit}) atingido. Desconecte um dispositivo para entrar.`);
+                return;
+            }
+
+            // Se o deviceId não estiver na lista, adiciona ele.
+            if (!devices.includes(deviceId)) {
+                devices.push(deviceId);
+            }
+
+            // Atualiza a lista de dispositivos no banco de dados
+            const patchResponse = await fetch(`${REALTIME_DB_URL}/resellers/${username}.json`, { 
+                method: "PATCH", 
+                headers: { 'Content-Type': 'application/json' }, 
+                body: JSON.stringify({ devices: devices }) 
+            });
+
+            if (!patchResponse.ok) {
+                alert("Erro ao vincular o dispositivo. Tente novamente.");
+                return;
+            }
+
+            currentUser = username;
+            currentRole = "reseller";
+            currentCredits = data.credits || 0;
+            currentPermissions = data.permissions || {};
+            loginSection.classList.add("content-hidden");
+            dashboardSection.classList.remove("content-hidden");
+            userDisplay.textContent = `Olá, ${currentUser}!`;
+            creditsDisplay.textContent = `Créditos: ${currentCredits}`;
+            manageTabBtn.classList.add("content-hidden");
+            apiDocsSection.classList.add("content-hidden");
+            fetchKeys();
+        });
+
+        logoutBtn.addEventListener("click", async () => {
+            // Remove o deviceId da lista de dispositivos ao fazer logout
+            if (currentUser && currentRole !== 'owner') {
+                const res = await fetch(`${REALTIME_DB_URL}/resellers/${currentUser}.json`);
+                const data = await res.json();
+                let devices = data.devices || [];
+                devices = devices.filter(id => id !== deviceId);
+
+                await fetch(`${REALTIME_DB_URL}/resellers/${currentUser}.json`, { 
+                    method: "PATCH", 
+                    headers: { 'Content-Type': 'application/json' }, 
+                    body: JSON.stringify({ devices: devices }) 
+                });
+            }
+
+            dashboardSection.classList.add("content-hidden");
+            loginSection.classList.remove("content-hidden");
+            currentUser = null;
+            currentCredits = 0;
+            currentPermissions = {};
+            keysTabBtn.classList.add("active");
+            manageTabBtn.classList.remove("active");
+            keysTab.classList.remove("content-hidden");
+            manageTab.classList.add("content-hidden");
+        });
+
+        createKeyForm.addEventListener("submit", async e => {
+            e.preventDefault();
+            if (currentRole === "reseller" && currentCredits <= 0) {
+                alert("Sem créditos! Recarregue sua conta para gerar mais chaves.");
+                return;
+            }
+            const days = parseInt(document.getElementById("validity-days").value);
+            if (isNaN(days) || days < 1) {
+                alert("Por favor, insira um número válido de dias para a validade.");
+                return;
+            }
+            const key = "rarecheats-" + Math.random().toString(36).substr(2, 8).toUpperCase();
+            const expires = new Date();
+            expires.setDate(expires.getDate() + days);
+            const keyData = { key, reseller: currentUser, expiresAt: expires.toISOString(), deviceId: null };
+            try {
+                const response = await fetch(`${REALTIME_DB_URL}/keys.json`, { method: "POST", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(keyData) });
+                if (!response.ok) throw new Error("Erro ao criar a chave.");
+                if (currentRole === "reseller") {
+                    currentCredits--;
+                    const patchResponse = await fetch(`${REALTIME_DB_URL}/resellers/${currentUser}.json`, { method: "PATCH", headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ credits: currentCredits }) });
+                    if (!patchResponse.ok) throw new Error("Erro ao atualizar os créditos.");
+                    creditsDisplay.textContent = `Créditos: ${currentCredits}`;
+                }
+                alert(`Key '${key}' criada com sucesso!`);
+                fetchKeys();
+            } catch (error) {
+                alert(`Erro: ${error.message}`);
+            }
+        });
+
+        async function fetchKeys() {
+            const res = await fetch(`${REALTIME_DB_URL}/keys.json`);
+            const data = await res.json();
+            const keys = data ? Object.entries(data).filter(([id, k]) => currentRole === "owner" || k.reseller === currentUser).map(([id, k]) => ({ id, ...k })) : [];
+            if (keys.length === 0) {
+                keysList.innerHTML = `<p class="text-center text-gray-500">Nenhuma key encontrada.</p>`;
+                return;
+            }
+            keysList.innerHTML = keys.sort((a, b) => new Date(b.expiresAt) - new Date(a.expiresAt)).map(k => `
+                <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-bold text-lg text-gray-800 break-all">${k.key}</h3>
+                        <div class="flex gap-2">
+                            <button onclick="resetKey('${k.id}')" title="Resetar Vínculo" class="bg-blue-100 text-blue-600 p-2 rounded-full hover:bg-blue-200 transition duration-200">
+                                <i class="fas fa-redo-alt"></i>
+                            </button>
+                            ${(currentRole === 'owner' || currentPermissions.deleteKeys) ? 
+                            `<button onclick="deleteKey('${k.id}')" title="Deletar Key" class="bg-red-100 text-red-600 p-2 rounded-full hover:bg-red-200 transition duration-200">
+                                <i class="fas fa-trash-alt"></i>
+  
