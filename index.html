@@ -66,10 +66,6 @@
       transition: 0.2s;
     }
 
-    .tab:hover {
-      background: #333;
-    }
-
     .tab.active {
       background: #FF0000;
     }
@@ -146,7 +142,6 @@
     <div class="tab" onclick="showTab('info', this)">Info</div>
   </div>
 
-  <!-- AIMBOT -->
   <div id="aimbot" class="content active">
     <label><input type="checkbox"> Ativar Auxílio</label>
     <label><input type="checkbox"> Ativar FOV</label>
@@ -167,7 +162,6 @@
     <label><input type="radio" name="tipo"> Ao Olhar</label>
   </div>
 
-  <!-- INFO -->
   <div id="info" class="content info">
     <p><b>Dispositivo:</b> <span id="modelo"></span></p>
     <p><b>Key:</b> <span id="key"></span></p>
@@ -179,7 +173,6 @@
   <button class="btn" onclick="abrirJogo()">INJETAR FUNÇÕES NO JOGO</button>
 </div>
 
-<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
 <script>
@@ -191,6 +184,7 @@
     el.classList.add('active');
   }
 
+  // FOV
   const fovRange = document.getElementById("fovRange");
   const fovValue = document.getElementById("fovValue");
 
@@ -198,25 +192,49 @@
     fovValue.textContent = fovRange.value;
   });
 
+  // Detectar dispositivo
   function getDeviceName() {
     const ua = navigator.userAgent;
 
     if (/iPhone/i.test(ua)) return "iPhone";
     if (/iPad/i.test(ua)) return "iPad";
     if (/Android/i.test(ua)) return "Android";
-    if (/Windows/i.test(ua)) return "Windows";
-    if (/Mac/i.test(ua)) return "Mac";
-
     return "Desconhecido";
   }
 
   document.getElementById("modelo").textContent = getDeviceName();
   document.getElementById("key").textContent = "auxiliorarecheats";
 
+  // 🚀 REDIRECIONAMENTO INTELIGENTE
   function abrirJogo() {
-    window.location.href = "https://play.google.com/store/apps/details?id=com.dts.freefireth";
+    const ua = navigator.userAgent;
+
+    const androidApp = "intent://#Intent;package=com.dts.freefireth;end";
+    const androidStore = "https://play.google.com/store/apps/details?id=com.dts.freefireth";
+
+    const iosApp = "freefire://";
+    const iosStore = "https://apps.apple.com/app/id1300146617";
+
+    if (/android/i.test(ua)) {
+      window.location.href = androidApp;
+
+      setTimeout(() => {
+        window.location.href = androidStore;
+      }, 2000);
+
+    } else if (/iPhone|iPad|iPod/i.test(ua)) {
+      window.location.href = iosApp;
+
+      setTimeout(() => {
+        window.location.href = iosStore;
+      }, 2000);
+
+    } else {
+      alert("Abra pelo celular.");
+    }
   }
 
+  // Partículas
   particlesJS("particles-js", {
     particles: {
       number: { value: 50 },
