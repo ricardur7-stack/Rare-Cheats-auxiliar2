@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AUXILIO BY RARE CHEATS</title>
+
   <style>
     body {
       margin: 0;
@@ -16,93 +17,89 @@
       align-items: center;
       justify-content: center;
     }
+
     #particles-js {
       position: absolute;
       width: 100%;
       height: 100%;
       z-index: 0;
     }
+
     .panel {
       position: relative;
       z-index: 1;
       background: #111;
       border-radius: 12px;
-      padding: 18px;
+      padding: 20px;
       width: 90%;
-      max-width: 340px;
-      box-shadow: 0 0 20px rgba(128,0,128,0.5);
+      max-width: 350px;
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
     }
+
     h2 {
       text-align: center;
-      margin: 0 0 8px;
+      margin-bottom: 10px;
       font-size: 18px;
     }
+
     .divider {
       height: 2px;
       background: #FF0000;
-      margin: 10px 0 15px;
+      margin: 12px 0;
     }
+
     .tabs {
       display: flex;
-      justify-content: space-between;
+      gap: 6px;
       margin-bottom: 15px;
     }
+
     .tab {
       flex: 1;
       text-align: center;
       padding: 8px;
       border-radius: 6px;
       background: #222;
-      margin: 0 4px;
       cursor: pointer;
       font-weight: bold;
       font-size: 14px;
+      transition: 0.2s;
     }
+
+    .tab:hover {
+      background: #333;
+    }
+
     .tab.active {
       background: #FF0000;
-      color: #fff;
     }
-    .content { display: none; }
-    .content.active { display: block; }
+
+    .content {
+      display: none;
+    }
+
+    .content.active {
+      display: block;
+    }
+
     label {
       display: flex;
       align-items: center;
       margin: 8px 0;
       font-size: 14px;
     }
+
     input[type="checkbox"], input[type="radio"] {
       accent-color: #FF0000;
       margin-right: 8px;
       transform: scale(1.2);
     }
-    /* Slider FOV */
+
     input[type="range"] {
-      -webkit-appearance: none;
       width: 100%;
-      height: 6px;
-      background: #333;
-      border-radius: 3px;
-      outline: none;
       margin: 10px 0;
     }
-    input[type="range"]::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: #FF0000;
-      cursor: pointer;
-      border: none;
-    }
-    input[type="range"]::-moz-range-thumb {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: #FF0000;
-      cursor: pointer;
-      border: none;
-    }
+
     select {
       width: 100%;
       padding: 6px;
@@ -110,137 +107,137 @@
       border-radius: 6px;
       background: #111;
       color: white;
-      font-size: 14px;
       margin-bottom: 10px;
     }
+
     .btn {
-      display: block;
       width: 100%;
       padding: 12px;
       margin-top: 18px;
-      text-align: center;
       border: none;
       border-radius: 8px;
       background: #FF0000;
       color: white;
       font-weight: bold;
       cursor: pointer;
-      font-size: 14px;
+      transition: 0.2s;
     }
+
+    .btn:hover {
+      background: #cc0000;
+    }
+
     .info p {
       margin: 6px 0;
-      font-size: 14px;
     }
   </style>
 </head>
+
 <body>
-  <div id="particles-js"></div>
-  
-  <div class="panel">
-    <h2>AUXILIO BY RARE CHEATS</h2>
-    <div class="divider"></div>
-    <div class="tabs">
-      <div class="tab active" onclick="showTab('aimbot', this)">Aimbot</div>
-      <div class="tab" onclick="showTab('info', this)">Info</div>
-    </div>
-    
-    <div id="aimbot" class="content active">
-      <label><input type="checkbox"> Ativar Auxílio</label>
-      <label><input type="checkbox"> Ativar Fov</label>
-      
-      <input type="range" min="0" max="100" value="0" id="fovRange">
-      <p>Fov: <span id="fovValue">0</span></p>
-      
-      <select>
-        <option>Auxilio Head</option>
-        <option>Auxilio Body</option>
-        <option>Auxilio Full</option>
-      </select>
-      
-      <div class="divider"></div>
-      <p>Tipo de Aimbot:</p>
-      <label><input type="radio" name="tipo"> Ao Atirar</label>
-      <label><input type="radio" name="tipo"> Ao Olhar</label>
-    </div>
-    
-    <div id="info" class="content info">
-      <p><b>Dispositivo:</b> <span id="modelo"></span></p>
-      <p><b>Key:</b> <span id="key"></span></p>
-      <div class="divider"></div>
-      <p><b>Dicas:</b> Ative Funções no Treinamento.</p>
-    </div>
-    
-    <button class="btn" onclick="abrirJogo()">INJETAR FUNÇÕES NO JOGO</button>
+
+<div id="particles-js"></div>
+
+<div class="panel">
+  <h2>AUXILIO BY RARE CHEATS</h2>
+  <div class="divider"></div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="showTab('aimbot', this)">Aimbot</div>
+    <div class="tab" onclick="showTab('info', this)">Info</div>
   </div>
-  
-  <!-- Script -->
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <script>
-    // Tabs
-    function showTab(id, el) {
-      document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      el.classList.add('active');
-    }
 
-    // Slider
-    const fovRange = document.getElementById("fovRange");
-    const fovValue = document.getElementById("fovValue");
-    fovRange.oninput = function() {
-      fovValue.textContent = this.value;
-    }
+  <!-- AIMBOT -->
+  <div id="aimbot" class="content active">
+    <label><input type="checkbox"> Ativar Auxílio</label>
+    <label><input type="checkbox"> Ativar FOV</label>
 
-    // Detectar dispositivo simplificado
-    function getDeviceName() {
-      const ua = navigator.userAgent;
-      if (/iPhone/i.test(ua)) return "iPhone";
-      if (/iPad/i.test(ua)) return "iPad";
-      if (/Android/i.test(ua)) return "Android";
-      if (/Windows/i.test(ua)) return "Windows";
-      if (/Macintosh/i.test(ua)) return "Mac";
-      return "Desconhecido";
-    }
-    document.getElementById("modelo").textContent = getDeviceName();
+    <input type="range" min="0" max="100" value="0" id="fovRange">
+    <p>FOV: <span id="fovValue">0</span></p>
 
-    // Key logada (aqui você pode trocar pelo valor que quiser)
-    const keyLogada = "auxiliorarecheats";
-    document.getElementById("key").textContent = keyLogada;
+    <select>
+      <option>Auxílio Head</option>
+      <option>Auxílio Body</option>
+      <option>Auxílio Full</option>
+    </select>
 
-    // Botão
-function abrirJogo() {
-  window.location.href = "https://play.google.com/store/apps/details?id=com.dts.freefireth";
-}
+    <div class="divider"></div>
 
-    
-   
+    <p>Tipo de Aimbot:</p>
+    <label><input type="radio" name="tipo"> Ao Atirar</label>
+    <label><input type="radio" name="tipo"> Ao Olhar</label>
+  </div>
 
-    // Partículas (teia azul)
-    particlesJS("particles-js", {
-      "particles": {
-        "number": { "value": 55 },
-        "color": { "value": "#FF0000" },
-        "shape": { "type": "circle" },
-        "opacity": { "value": 0.6 },
-        "size": { "value": 4 },
-        "line_linked": {
-          "enable": true,
-          "distance": 160,
-          "color": "#FF0000",
-          "opacity": 0.6,
-          "width": 1.5
-        },
-        "move": {
-          "enable": true,
-          "speed": 2.5,
-          "direction": "none",
-          "out_mode": "bounce"
-        }
+  <!-- INFO -->
+  <div id="info" class="content info">
+    <p><b>Dispositivo:</b> <span id="modelo"></span></p>
+    <p><b>Key:</b> <span id="key"></span></p>
+
+    <div class="divider"></div>
+    <p><b>Dicas:</b> Ative funções no modo treinamento.</p>
+  </div>
+
+  <button class="btn" onclick="abrirJogo()">INJETAR FUNÇÕES NO JOGO</button>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+<script>
+  function showTab(id, el) {
+    document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  const fovRange = document.getElementById("fovRange");
+  const fovValue = document.getElementById("fovValue");
+
+  fovRange.addEventListener("input", () => {
+    fovValue.textContent = fovRange.value;
+  });
+
+  function getDeviceName() {
+    const ua = navigator.userAgent;
+
+    if (/iPhone/i.test(ua)) return "iPhone";
+    if (/iPad/i.test(ua)) return "iPad";
+    if (/Android/i.test(ua)) return "Android";
+    if (/Windows/i.test(ua)) return "Windows";
+    if (/Mac/i.test(ua)) return "Mac";
+
+    return "Desconhecido";
+  }
+
+  document.getElementById("modelo").textContent = getDeviceName();
+  document.getElementById("key").textContent = "auxiliorarecheats";
+
+  function abrirJogo() {
+    window.location.href = "https://play.google.com/store/apps/details?id=com.dts.freefireth";
+  }
+
+  particlesJS("particles-js", {
+    particles: {
+      number: { value: 50 },
+      color: { value: "#FF0000" },
+      shape: { type: "circle" },
+      opacity: { value: 0.5 },
+      size: { value: 3 },
+      line_linked: {
+        enable: true,
+        distance: 150,
+        color: "#FF0000",
+        opacity: 0.4,
+        width: 1
+      },
+      move: {
+        enable: true,
+        speed: 2
       }
-    });
-  </script>
+    }
+  });
+</script>
+
 </body>
 </html>
-dy>
-</html>
-ml>
