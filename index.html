@@ -205,35 +205,79 @@
   document.getElementById("modelo").textContent = getDeviceName();
   document.getElementById("key").textContent = "auxiliorarecheats";
 
-  // 🚀 REDIRECIONAMENTO INTELIGENTE
-  function abrirJogo() {
-    const ua = navigator.userAgent;
+<script>
+function abrirJogo() {
 
-    const androidApp = "intent://#Intent;package=com.dts.freefireth;end";
-    const androidStore = "https://play.google.com/store/apps/details?id=com.dts.freefireth";
+  const ua = navigator.userAgent;
 
-    const iosApp = "freefire://";
-    const iosStore = "https://apps.apple.com/app/id1300146617";
+  // ANDROID
+  const androidMax =
+  "intent://#Intent;package=com.dts.freefiremax;end";
 
-    if (/android/i.test(ua)) {
-      window.location.href = androidApp;
+  const androidNormal =
+  "intent://#Intent;package=com.dts.freefireth;end";
+
+  const androidStore =
+  "https://play.google.com/store/apps/details?id=com.dts.freefireth";
+
+
+  // IOS
+  const iosMax = "freefiremax://";
+  const iosNormal = "freefire://";
+
+  const iosStore =
+  "https://apps.apple.com/app/id1300146617";
+
+
+  if (/android/i.test(ua)) {
+
+      // Tenta Free Fire MAX
+      window.location.href = androidMax;
 
       setTimeout(() => {
-        window.location.href = androidStore;
-      }, 2000);
 
-    } else if (/iPhone|iPad|iPod/i.test(ua)) {
-      window.location.href = iosApp;
+          // Se não abriu tenta normal
+          window.location.href = androidNormal;
+
+      },1500);
+
 
       setTimeout(() => {
-        window.location.href = iosStore;
-      }, 2000);
 
-    } else {
+          // fallback loja
+          window.location.href = androidStore;
+
+      },3000);
+
+
+  } else if (/iPhone|iPad|iPod/i.test(ua)) {
+
+      // Tenta MAX
+      window.location.href = iosMax;
+
+      setTimeout(() => {
+
+          // tenta normal
+          window.location.href = iosNormal;
+
+      },1500);
+
+
+      setTimeout(() => {
+
+          // fallback App Store
+          window.location.href = iosStore;
+
+      },3000);
+
+  } else {
+
       alert("Abra pelo celular.");
-    }
+
   }
 
+}
+</script>
   // Partículas
   particlesJS("particles-js", {
     particles: {
