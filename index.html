@@ -204,7 +204,7 @@
 
   document.getElementById("modelo").textContent = getDeviceName();
   document.getElementById("key").textContent = "auxiliorarecheats";
-<script>
+
 function abrirJogo() {
 
   const ua = navigator.userAgent;
@@ -219,14 +219,12 @@ function abrirJogo() {
   const androidStore =
   "https://play.google.com/store/apps/details?id=com.dts.freefireth";
 
-
   // IOS
   const iosMax = "freefiremax://";
   const iosNormal = "freefire://";
 
   const iosStore =
   "https://apps.apple.com/app/id1300146617";
-
 
   if (/android/i.test(ua)) {
 
@@ -240,14 +238,12 @@ function abrirJogo() {
 
       },1500);
 
-
       setTimeout(() => {
 
           // fallback loja
           window.location.href = androidStore;
 
       },3000);
-
 
   } else if (/iPhone|iPad|iPod/i.test(ua)) {
 
@@ -260,7 +256,6 @@ function abrirJogo() {
           window.location.href = iosNormal;
 
       },1500);
-
 
       setTimeout(() => {
 
