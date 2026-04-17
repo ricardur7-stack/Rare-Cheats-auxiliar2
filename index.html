@@ -205,72 +205,33 @@
   document.getElementById("modelo").textContent = getDeviceName();
   document.getElementById("key").textContent = "auxiliorarecheats";
 
-function abrirJogo() {
+  function abrirJogo() {
+    const ua = navigator.userAgent;
 
-  const ua = navigator.userAgent;
+    const androidApp = "intent://#Intent;package=com.dts.freefireth;end";
+    const androidStore = "https://play.google.com/store/apps/details?id=com.dts.freefireth";
 
-  // ANDROID
-  const androidMax =
-  "intent://#Intent;package=com.dts.freefiremax;end";
+    const iosApp = "freefire://";
+    const iosStore = "https://apps.apple.com/app/id1300146617";
 
-  const androidNormal =
-  "intent://#Intent;package=com.dts.freefireth;end";
-
-  const androidStore =
-  "https://play.google.com/store/apps/details?id=com.dts.freefireth";
-
-  // IOS
-  const iosMax = "freefiremax://";
-  const iosNormal = "freefire://";
-
-  const iosStore =
-  "https://apps.apple.com/app/id1300146617";
-
-  if (/android/i.test(ua)) {
-
-      // Tenta Free Fire MAX
-      window.location.href = androidMax;
+    if (/android/i.test(ua)) {
+      window.location.href = androidApp;
 
       setTimeout(() => {
+        window.location.href = androidStore;
+      }, 2000);
 
-          // Se não abriu tenta normal
-          window.location.href = androidNormal;
-
-      },1500);
-
-      setTimeout(() => {
-
-          // fallback loja
-          window.location.href = androidStore;
-
-      },3000);
-
-  } else if (/iPhone|iPad|iPod/i.test(ua)) {
-
-      // Tenta MAX
-      window.location.href = iosMax;
+    } else if (/iPhone|iPad|iPod/i.test(ua)) {
+      window.location.href = iosApp;
 
       setTimeout(() => {
+        window.location.href = iosStore;
+      }, 2000);
 
-          // tenta normal
-          window.location.href = iosNormal;
-
-      },1500);
-
-      setTimeout(() => {
-
-          // fallback App Store
-          window.location.href = iosStore;
-
-      },3000);
-
-  } else {
-
+    } else {
       alert("Abra pelo celular.");
-
+    }
   }
-
-}
 <script>
   // Partículas
   particlesJS("particles-js", {
