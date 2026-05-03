@@ -1,259 +1,315 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AUXILIO AURA CHEATS</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #000;
-      color: #fff;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+<title>VETRIX PRO</title>
 
-    #particles-js {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-    }
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
-    .panel {
-      position: relative;
-      z-index: 1;
-      background: #111;
-      border-radius: 12px;
-      padding: 20px;
-      width: 90%;
-      max-width: 350px;
-      box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
-    }
+<style>
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:-apple-system;
+}
 
-    h2 {
-      text-align: center;
-      margin-bottom: 10px;
-      font-size: 18px;
-    }
+body {
+  background: radial-gradient(circle at top, #1a0000, #000);
+  color:white;
+}
 
-    .divider {
-      height: 2px;
-      background: #FF0000;
-      margin: 12px 0;
-    }
+/* LOGIN */
+#login {
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
-    .tabs {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 15px;
-    }
+.card {
+  width:90%;
+  max-width:320px;
+  padding:30px;
+  border-radius:20px;
+  background:#0f0f0f;
+  box-shadow:0 0 40px rgba(255,0,0,0.3);
+  text-align:center;
+  animation:fade 0.5s ease;
+}
 
-    .tab {
-      flex: 1;
-      text-align: center;
-      padding: 8px;
-      border-radius: 6px;
-      background: #222;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 14px;
-      transition: 0.2s;
-    }
+.card h2 {
+  color:red;
+  margin-bottom:20px;
+}
 
-    .tab.active {
-      background: #FF0000;
-    }
+input {
+  width:100%;
+  padding:14px;
+  border-radius:10px;
+  border:none;
+  background:#1a1a1a;
+  color:white;
+  margin-top:10px;
+}
 
-    .content {
-      display: none;
-    }
+button {
+  width:100%;
+  padding:14px;
+  margin-top:15px;
+  border:none;
+  border-radius:10px;
+  background:red;
+  color:white;
+  font-weight:bold;
+}
 
-    .content.active {
-      display: block;
-    }
+/* PANEL */
+#panel {
+  display:none;
+  padding:15px;
+}
 
-    label {
-      display: flex;
-      align-items: center;
-      margin: 8px 0;
-      font-size: 14px;
-    }
+.box {
+  max-width:420px;
+  margin:auto;
+  background:#0f0f0f;
+  padding:20px;
+  border-radius:20px;
+  box-shadow:0 0 30px rgba(255,0,0,0.2);
+}
 
-    input[type="checkbox"], input[type="radio"] {
-      accent-color: #FF0000;
-      margin-right: 8px;
-      transform: scale(1.2);
-    }
+/* HEADER */
+.title {
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+}
 
-    input[type="range"] {
-      width: 100%;
-      margin: 10px 0;
-    }
+.line {
+  height:2px;
+  background:red;
+  margin-bottom:15px;
+}
 
-    select {
-      width: 100%;
-      padding: 6px;
-      border: 2px solid #FF0000;
-      border-radius: 6px;
-      background: #111;
-      color: white;
-      margin-bottom: 10px;
-    }
+/* TABS */
+.tabs {
+  display:flex;
+  gap:10px;
+}
 
-    .btn {
-      width: 100%;
-      padding: 12px;
-      margin-top: 18px;
-      border: none;
-      border-radius: 8px;
-      background: #FF0000;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+.tab {
+  flex:1;
+  padding:12px;
+  border-radius:10px;
+  background:#1a1a1a;
+  text-align:center;
+}
 
-    .btn:hover {
-      background: #cc0000;
-    }
+.active {
+  background:red;
+}
 
-    .info p {
-      margin: 6px 0;
-    }
-  </style>
+/* SWITCH */
+.switch {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:15px;
+}
+
+.switch input {
+  width:40px;
+}
+
+/* SLIDER */
+.slider {
+  width:100%;
+  margin-top:10px;
+}
+
+/* SELECT */
+select {
+  width:100%;
+  padding:12px;
+  margin-top:15px;
+  border-radius:10px;
+  background:#1a1a1a;
+  color:white;
+  border:1px solid red;
+}
+
+/* RADIO */
+.radio {
+  margin-top:10px;
+}
+
+/* BTN INJETAR */
+.inject {
+  margin-top:20px;
+  padding:16px;
+  background:red;
+  text-align:center;
+  border-radius:12px;
+  font-weight:bold;
+}
+
+/* STATUS */
+#status {
+  font-size:12px;
+  color:#aaa;
+  text-align:center;
+  margin-bottom:10px;
+}
+
+/* ANIMAÇÃO */
+@keyframes fade {
+  from {opacity:0; transform:translateY(10px);}
+  to {opacity:1;}
+}
+</style>
 </head>
 
 <body>
 
-<div id="particles-js"></div>
-
-<div class="panel">
-  <h2>AUXILIO AURA CHEATS</h2>
-  <div class="divider"></div>
-
-  <div class="tabs">
-    <div class="tab active" onclick="showTab('aimbot', this)">Aimbot</div>
-    <div class="tab" onclick="showTab('info', this)">Info</div>
+<!-- LOGIN -->
+<div id="login">
+  <div class="card">
+    <h2>VETRIX</h2>
+    <input id="keyInput" placeholder="Digite sua KEY">
+    <button onclick="entrar()">ENTRAR</button>
+    <p id="msg"></p>
   </div>
+</div>
 
-  <div id="aimbot" class="content active">
-    <label><input type="checkbox"> Ativar Auxílio</label>
-    <label><input type="checkbox"> Ativar FOV</label>
+<!-- PANEL -->
+<div id="panel">
+  <div class="box">
 
-    <input type="range" min="0" max="100" value="0" id="fovRange">
-    <p>FOV: <span id="fovValue">0</span></p>
+    <div class="title">AUXILIO AURA</div>
+    <div class="line"></div>
+
+    <div id="status"></div>
+
+    <div class="tabs">
+      <div class="tab active">Aimbot</div>
+      <div class="tab">Info</div>
+    </div>
+
+    <div class="switch">
+      <input type="checkbox"> Ativar Auxílio
+    </div>
+
+    <div class="switch">
+      <input type="checkbox"> Ativar FOV
+    </div>
+
+    <input type="range" min="0" max="100" value="0" class="slider" id="fov" oninput="updateFov()">
+    <p id="fovTxt">FOV: 0</p>
 
     <select>
       <option>Auxílio Head</option>
       <option>Auxílio Body</option>
-      <option>Auxílio Full</option>
     </select>
 
-    <div class="divider"></div>
+    <div class="line"></div>
 
     <p>Tipo de Aimbot:</p>
-    <label><input type="radio" name="tipo"> Ao Atirar</label>
-    <label><input type="radio" name="tipo"> Ao Olhar</label>
+
+    <div class="radio">
+      <input type="radio" name="aim"> Ao Atirar
+    </div>
+
+    <div class="radio">
+      <input type="radio" name="aim"> Ao Olhar
+    </div>
+
+    <div class="inject" onclick="inject()">INJETAR FUNÇÕES NO JOGO</div>
+
+    <button onclick="abrirFF()">ABRIR FREE FIRE</button>
+    <button onclick="logout()">SAIR</button>
+
   </div>
-
-  <div id="info" class="content info">
-    <p><b>Dispositivo:</b> <span id="modelo"></span></p>
-    <p><b>Key:</b> <span id="key"></span></p>
-
-    <div class="divider"></div>
-    <p><b>Dicas:</b> Ative funções no modo treinamento.</p>
-  </div>
-
-  <button class="btn" onclick="abrirJogo()">INJETAR FUNÇÕES NO JOGO</button>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-
 <script>
-  function showTab(id, el) {
-    document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
+// FIREBASE
+const firebaseConfig = {
+    apiKey: "AIzaSyBlug6Fm9HjfWaaMOUHGNJVHpW97BvBF-g",
+    authDomain: "vetrix7-1d0cd.firebaseapp.com",
+    databaseURL: "https://vetrix7-1d0cd-default-rtdb.firebaseio.com",
+    projectId: "vetrix7-1d0cd"
+};
 
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    el.classList.add('active');
-  }
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
 
-  // FOV
-  const fovRange = document.getElementById("fovRange");
-  const fovValue = document.getElementById("fovValue");
+// AUTO LOGIN
+const saved = localStorage.getItem("key");
+if(saved) validar(saved);
 
-  fovRange.addEventListener("input", () => {
-    fovValue.textContent = fovRange.value;
-  });
+function entrar(){
+    const key = document.getElementById("keyInput").value;
+    validar(key);
+}
 
-  // Detectar dispositivo
-  function getDeviceName() {
-    const ua = navigator.userAgent;
+function validar(key){
+    db.ref("keys").once("value").then(snap=>{
+        let ok=false;
 
-    if (/iPhone/i.test(ua)) return "iPhone";
-    if (/iPad/i.test(ua)) return "iPad";
-    if (/Android/i.test(ua)) return "Android";
-    return "Desconhecido";
-  }
+        snap.forEach(s=>{
+            const k=s.val();
 
-  document.getElementById("modelo").textContent = getDeviceName();
-  document.getElementById("key").textContent = "auxiliorarecheats";
+            if(k.key===key){
+                const now=new Date();
+                const exp=new Date(k.expiresAt);
 
-  function abrirJogo() {
-    const ua = navigator.userAgent;
+                if(now<=exp){
+                    ok=true;
 
-    const androidApp = "intent://#Intent;package=com.dts.freefireth;end";
-    const androidStore = "https://play.google.com/store/apps/details?id=com.dts.freefireth";
+                    localStorage.setItem("key",key);
 
-    const iosApp = "freefire://";
-    const iosStore = "https://apps.apple.com/app/id1300146617";
+                    document.getElementById("login").style.display="none";
+                    document.getElementById("panel").style.display="block";
 
-    if (/android/i.test(ua)) {
-      window.location.href = androidApp;
+                    document.getElementById("status").innerText=
+                      "Ativa até "+exp.toLocaleDateString();
 
-      setTimeout(() => {
-        window.location.href = androidStore;
-      }, 2000);
+                    return true;
+                }
+            }
+        });
 
-    } else if (/iPhone|iPad|iPod/i.test(ua)) {
-      window.location.href = iosApp;
+        if(!ok){
+            document.getElementById("msg").innerText="Key inválida";
+        }
+    });
+}
 
-      setTimeout(() => {
-        window.location.href = iosStore;
-      }, 2000);
+function logout(){
+    localStorage.removeItem("key");
+    location.reload();
+}
 
-    } else {
-      alert("Abra pelo celular.");
-    }
-  }
-<script>
-  // Partículas
-  particlesJS("particles-js", {
-    particles: {
-      number: { value: 50 },
-      color: { value: "#FF0000" },
-      shape: { type: "circle" },
-      opacity: { value: 0.5 },
-      size: { value: 3 },
-      line_linked: {
-        enable: true,
-        distance: 150,
-        color: "#FF0000",
-        opacity: 0.4,
-        width: 1
-      },
-      move: {
-        enable: true,
-        speed: 2
-      }
-    }
-  });
+function updateFov(){
+  document.getElementById("fovTxt").innerText =
+    "FOV: " + document.getElementById("fov").value;
+}
+
+function inject(){
+  alert("Funções aplicadas!");
+}
+
+function abrirFF(){
+  window.location.href="freefire://";
+
+  setTimeout(()=>{
+    window.location.href="https://apps.apple.com/app/free-fire/id1300146617";
+  },2000);
+}
 </script>
 
 </body>
