@@ -4,33 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>VETRIX PRO</title>
+<title>VETRIX</title>
 
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
 <style>
-* {
+*{
   margin:0;
   padding:0;
   box-sizing:border-box;
   font-family:-apple-system;
 }
 
-body {
-  background: radial-gradient(circle at top, #1a0000, #000);
+body{
+  background:radial-gradient(circle,#1a0000,#000);
   color:white;
 }
 
 /* LOGIN */
-#login {
+#login{
   height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
 }
 
-.card {
+.card{
   width:90%;
   max-width:320px;
   padding:30px;
@@ -38,15 +38,15 @@ body {
   background:#0f0f0f;
   box-shadow:0 0 40px rgba(255,0,0,0.3);
   text-align:center;
-  animation:fade 0.5s ease;
+  animation:fade .5s;
 }
 
-.card h2 {
+.card h2{
   color:red;
   margin-bottom:20px;
 }
 
-input {
+input{
   width:100%;
   padding:14px;
   border-radius:10px;
@@ -56,7 +56,7 @@ input {
   margin-top:10px;
 }
 
-button {
+button{
   width:100%;
   padding:14px;
   margin-top:15px;
@@ -68,12 +68,12 @@ button {
 }
 
 /* PANEL */
-#panel {
+#panel{
   display:none;
   padding:15px;
 }
 
-.box {
+.box{
   max-width:420px;
   margin:auto;
   background:#0f0f0f;
@@ -83,99 +83,89 @@ button {
 }
 
 /* HEADER */
-.title {
+.title{
   text-align:center;
   font-size:22px;
-  margin-bottom:10px;
 }
 
-.line {
+.line{
   height:2px;
   background:red;
-  margin-bottom:15px;
+  margin:10px 0 15px;
 }
 
 /* TABS */
-.tabs {
+.tabs{
   display:flex;
   gap:10px;
 }
 
-.tab {
+.tab{
   flex:1;
   padding:12px;
   border-radius:10px;
   background:#1a1a1a;
   text-align:center;
+  transition:.3s;
 }
 
-.active {
+.active{
   background:red;
 }
 
-/* SWITCH */
-.switch {
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-top:15px;
+/* CONTENT */
+.tab-content{
+  display:none;
 }
 
-.switch input {
-  width:40px;
+.tab-content.active{
+  display:block;
 }
 
-/* SLIDER */
-.slider {
+/* SLIDER BONITO */
+.slider{
+  -webkit-appearance:none;
   width:100%;
-  margin-top:10px;
-}
-
-/* SELECT */
-select {
-  width:100%;
-  padding:12px;
-  margin-top:15px;
+  height:6px;
   border-radius:10px;
-  background:#1a1a1a;
-  color:white;
-  border:1px solid red;
-}
-
-/* RADIO */
-.radio {
+  background:linear-gradient(90deg,red,#300000);
   margin-top:10px;
 }
 
-/* BTN INJETAR */
-.inject {
-  margin-top:20px;
-  padding:16px;
+.slider::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:18px;
+  height:18px;
+  border-radius:50%;
   background:red;
+  box-shadow:0 0 10px red;
+}
+
+/* BTN */
+.btn{
+  margin-top:15px;
+  padding:14px;
+  background:red;
+  border-radius:10px;
   text-align:center;
-  border-radius:12px;
-  font-weight:bold;
 }
 
 /* STATUS */
-#status {
+#status{
   font-size:12px;
-  color:#aaa;
   text-align:center;
-  margin-bottom:10px;
+  color:#aaa;
 }
 
-/* ANIMAÇÃO */
-@keyframes fade {
-  from {opacity:0; transform:translateY(10px);}
-  to {opacity:1;}
+/* ANIMA */
+@keyframes fade{
+  from{opacity:0;transform:translateY(10px)}
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
 <div id="login">
   <div class="card">
     <h2>VETRIX</h2>
@@ -185,130 +175,128 @@ select {
   </div>
 </div>
 
-<!-- PANEL -->
 <div id="panel">
   <div class="box">
 
-    <div class="title">AUXILIO AURA</div>
+    <div class="title">VETRIX PANEL</div>
     <div class="line"></div>
 
-    <div id="status"></div>
+    <p id="status"></p>
 
     <div class="tabs">
-      <div class="tab active">Aimbot</div>
-      <div class="tab">Info</div>
+      <div class="tab active" onclick="trocar(0)">Config</div>
+      <div class="tab" onclick="trocar(1)">Info</div>
     </div>
 
-    <div class="switch">
-      <input type="checkbox"> Ativar Auxílio
+    <!-- ABA 1 -->
+    <div class="tab-content active">
+      <p>FPS</p>
+      <input type="range" min="30" max="120" value="60" class="slider" id="fps" oninput="fpsUpdate()">
+      <p id="fpsTxt">60 FPS</p>
+
+      <p>Delay</p>
+      <input type="range" min="0" max="100" value="0" class="slider" id="delay" oninput="delayUpdate()">
+      <p id="delayTxt">0%</p>
+
+      <div class="btn" onclick="apply()">Aplicar Config</div>
     </div>
 
-    <div class="switch">
-      <input type="checkbox"> Ativar FOV
+    <!-- ABA 2 -->
+    <div class="tab-content">
+      <p>Versão: 1.0</p>
+      <p>Usuário ativo</p>
     </div>
 
-    <input type="range" min="0" max="100" value="0" class="slider" id="fov" oninput="updateFov()">
-    <p id="fovTxt">FOV: 0</p>
-
-    <select>
-      <option>Auxílio Head</option>
-      <option>Auxílio Body</option>
-    </select>
-
-    <div class="line"></div>
-
-    <p>Tipo de Aimbot:</p>
-
-    <div class="radio">
-      <input type="radio" name="aim"> Ao Atirar
-    </div>
-
-    <div class="radio">
-      <input type="radio" name="aim"> Ao Olhar
-    </div>
-
-    <div class="inject" onclick="inject()">INJETAR FUNÇÕES NO JOGO</div>
-
-    <button onclick="abrirFF()">ABRIR FREE FIRE</button>
-    <button onclick="logout()">SAIR</button>
+    <div class="btn" onclick="abrirFF()">ABRIR FREE FIRE</div>
+    <div class="btn" onclick="logout()">SAIR</div>
 
   </div>
 </div>
 
 <script>
 // FIREBASE
-const firebaseConfig = {
-    apiKey: "AIzaSyBlug6Fm9HjfWaaMOUHGNJVHpW97BvBF-g",
-    authDomain: "vetrix7-1d0cd.firebaseapp.com",
-    databaseURL: "https://vetrix7-1d0cd-default-rtdb.firebaseio.com",
-    projectId: "vetrix7-1d0cd"
+const firebaseConfig={
+ apiKey:"AIzaSyBlug6Fm9HjfWaaMOUHGNJVHpW97BvBF-g",
+ authDomain:"vetrix7-1d0cd.firebaseapp.com",
+ databaseURL:"https://vetrix7-1d0cd-default-rtdb.firebaseio.com",
+ projectId:"vetrix7-1d0cd"
 };
 
 firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
+const db=firebase.database();
 
 // AUTO LOGIN
-const saved = localStorage.getItem("key");
+const saved=localStorage.getItem("key");
 if(saved) validar(saved);
 
 function entrar(){
-    const key = document.getElementById("keyInput").value;
-    validar(key);
+  const key=document.getElementById("keyInput").value;
+  validar(key);
 }
 
 function validar(key){
-    db.ref("keys").once("value").then(snap=>{
-        let ok=false;
+  db.ref("keys").once("value").then(snap=>{
+    let ok=false;
 
-        snap.forEach(s=>{
-            const k=s.val();
+    snap.forEach(s=>{
+      const k=s.val();
 
-            if(k.key===key){
-                const now=new Date();
-                const exp=new Date(k.expiresAt);
+      if(k.key===key){
+        const now=new Date();
+        const exp=new Date(k.expiresAt);
 
-                if(now<=exp){
-                    ok=true;
+        if(now<=exp){
+          ok=true;
 
-                    localStorage.setItem("key",key);
+          localStorage.setItem("key",key);
 
-                    document.getElementById("login").style.display="none";
-                    document.getElementById("panel").style.display="block";
+          document.getElementById("login").style.display="none";
+          document.getElementById("panel").style.display="block";
 
-                    document.getElementById("status").innerText=
-                      "Ativa até "+exp.toLocaleDateString();
+          document.getElementById("status").innerText=
+            "Ativa até "+exp.toLocaleDateString();
 
-                    return true;
-                }
-            }
-        });
-
-        if(!ok){
-            document.getElementById("msg").innerText="Key inválida";
+          return true;
         }
+      }
     });
+
+    if(!ok) document.getElementById("msg").innerText="Key inválida";
+  });
 }
 
-function logout(){
-    localStorage.removeItem("key");
-    location.reload();
+// TABS
+function trocar(i){
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  document.querySelectorAll(".tab-content").forEach(c=>c.classList.remove("active"));
+
+  document.querySelectorAll(".tab")[i].classList.add("active");
+  document.querySelectorAll(".tab-content")[i].classList.add("active");
 }
 
-function updateFov(){
-  document.getElementById("fovTxt").innerText =
-    "FOV: " + document.getElementById("fov").value;
+// UI
+function fpsUpdate(){
+  fpsTxt.innerText=fps.value+" FPS";
 }
 
-function inject(){
-  alert("Funções aplicadas!");
+function delayUpdate(){
+  delayTxt.innerText=delay.value+"%";
+}
+
+function apply(){
+  alert("Config aplicada!");
 }
 
 function abrirFF(){
   window.location.href="freefire://";
-
   setTimeout(()=>{
     window.location.href="https://apps.apple.com/app/free-fire/id1300146617";
   },2000);
+}
+
+function logout(){
+  localStorage.removeItem("key");
+  location.reload();
 }
 </script>
 
