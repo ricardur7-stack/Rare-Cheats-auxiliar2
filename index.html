@@ -10,15 +10,10 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:-apple-system;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system;}
 
 body{
-  background:radial-gradient(circle,#1a0000,#000);
+  background: radial-gradient(circle at top,#1a0000,#000);
   color:white;
 }
 
@@ -32,24 +27,25 @@ body{
 
 .card{
   width:90%;
-  max-width:320px;
+  max-width:330px;
   padding:30px;
-  border-radius:20px;
-  background:#0f0f0f;
+  border-radius:25px;
+  background:rgba(20,0,0,0.6);
+  backdrop-filter:blur(25px);
+  border:1px solid rgba(255,0,0,0.2);
   box-shadow:0 0 40px rgba(255,0,0,0.3);
   text-align:center;
-  animation:fade .5s;
 }
 
 .card h2{
-  color:red;
-  margin-bottom:20px;
+  color:#ff2e2e;
+  margin-bottom:15px;
 }
 
 input{
   width:100%;
   padding:14px;
-  border-radius:10px;
+  border-radius:12px;
   border:none;
   background:#1a1a1a;
   color:white;
@@ -61,24 +57,21 @@ button{
   padding:14px;
   margin-top:15px;
   border:none;
-  border-radius:10px;
-  background:red;
+  border-radius:12px;
+  background:linear-gradient(red,#700000);
   color:white;
   font-weight:bold;
 }
 
 /* PANEL */
-#panel{
-  display:none;
-  padding:15px;
-}
+#panel{display:none;padding:15px;}
 
 .box{
   max-width:420px;
   margin:auto;
-  background:#0f0f0f;
   padding:20px;
-  border-radius:20px;
+  border-radius:25px;
+  background:#0f0f0f;
   box-shadow:0 0 30px rgba(255,0,0,0.2);
 }
 
@@ -86,12 +79,13 @@ button{
 .title{
   text-align:center;
   font-size:22px;
+  letter-spacing:2px;
 }
 
 .line{
   height:2px;
   background:red;
-  margin:10px 0 15px;
+  margin:15px 0;
 }
 
 /* TABS */
@@ -104,25 +98,52 @@ button{
   flex:1;
   padding:12px;
   border-radius:10px;
-  background:#1a1a1a;
   text-align:center;
+  background:#1a1a1a;
   transition:.3s;
 }
 
-.active{
+.tab.active{
   background:red;
 }
 
-/* CONTENT */
-.tab-content{
-  display:none;
+/* SWITCH */
+.switch{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:15px;
 }
 
-.tab-content.active{
-  display:block;
+.toggle{
+  width:45px;
+  height:24px;
+  background:#333;
+  border-radius:20px;
+  position:relative;
 }
 
-/* SLIDER BONITO */
+.toggle::before{
+  content:"";
+  width:20px;
+  height:20px;
+  background:white;
+  border-radius:50%;
+  position:absolute;
+  top:2px;
+  left:2px;
+  transition:.3s;
+}
+
+input:checked + .toggle{
+  background:red;
+}
+
+input:checked + .toggle::before{
+  transform:translateX(20px);
+}
+
+/* SLIDER */
 .slider{
   -webkit-appearance:none;
   width:100%;
@@ -141,13 +162,33 @@ button{
   box-shadow:0 0 10px red;
 }
 
+/* SELECT */
+select{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  margin-top:15px;
+  background:#1a1a1a;
+  color:white;
+  border:1px solid red;
+}
+
+/* RADIO */
+.radio{
+  margin-top:10px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
 /* BTN */
 .btn{
-  margin-top:15px;
-  padding:14px;
-  background:red;
-  border-radius:10px;
+  margin-top:20px;
+  padding:15px;
+  border-radius:12px;
+  background:linear-gradient(red,#700000);
   text-align:center;
+  font-weight:bold;
 }
 
 /* STATUS */
@@ -156,16 +197,12 @@ button{
   text-align:center;
   color:#aaa;
 }
-
-/* ANIMA */
-@keyframes fade{
-  from{opacity:0;transform:translateY(10px)}
-}
 </style>
 </head>
 
 <body>
 
+<!-- LOGIN -->
 <div id="login">
   <div class="card">
     <h2>VETRIX</h2>
@@ -175,14 +212,16 @@ button{
   </div>
 </div>
 
+<!-- PANEL -->
 <div id="panel">
   <div class="box">
 
-    <div class="title">VETRIX PANEL</div>
+    <div class="title">AUXILIO PANEL</div>
     <div class="line"></div>
 
     <p id="status"></p>
 
+    <!-- TABS -->
     <div class="tabs">
       <div class="tab active" onclick="trocar(0)">Config</div>
       <div class="tab" onclick="trocar(1)">Info</div>
@@ -190,21 +229,51 @@ button{
 
     <!-- ABA 1 -->
     <div class="tab-content active">
-      <p>FPS</p>
-      <input type="range" min="30" max="120" value="60" class="slider" id="fps" oninput="fpsUpdate()">
-      <p id="fpsTxt">60 FPS</p>
 
-      <p>Delay</p>
-      <input type="range" min="0" max="100" value="0" class="slider" id="delay" oninput="delayUpdate()">
-      <p id="delayTxt">0%</p>
+      <div class="switch">
+        <span>Ativar Função</span>
+        <label>
+          <input type="checkbox" hidden>
+          <div class="toggle"></div>
+        </label>
+      </div>
 
-      <div class="btn" onclick="apply()">Aplicar Config</div>
+      <div class="switch">
+        <span>Ativar Ajuste</span>
+        <label>
+          <input type="checkbox" hidden>
+          <div class="toggle"></div>
+        </label>
+      </div>
+
+      <input type="range" min="0" max="100" value="0" class="slider" id="fov" oninput="updateFov()">
+      <p id="fovTxt">Valor: 0</p>
+
+      <select>
+        <option>Modo Padrão</option>
+        <option>Modo Avançado</option>
+      </select>
+
+      <div class="line"></div>
+
+      <p>Tipo:</p>
+
+      <div class="radio">
+        <input type="radio" name="tipo"> Opção 1
+      </div>
+
+      <div class="radio">
+        <input type="radio" name="tipo"> Opção 2
+      </div>
+
+      <div class="btn" onclick="apply()">APLICAR CONFIG</div>
+
     </div>
 
     <!-- ABA 2 -->
     <div class="tab-content">
-      <p>Versão: 1.0</p>
-      <p>Usuário ativo</p>
+      <p>Versão 1.0</p>
+      <p>Sistema online</p>
     </div>
 
     <div class="btn" onclick="abrirFF()">ABRIR FREE FIRE</div>
@@ -216,56 +285,33 @@ button{
 <script>
 // FIREBASE
 const firebaseConfig={
- apiKey:"AIzaSyBlug6Fm9HjfWaaMOUHGNJVHpW97BvBF-g",
- authDomain:"vetrix7-1d0cd.firebaseapp.com",
- databaseURL:"https://vetrix7-1d0cd-default-rtdb.firebaseio.com",
- projectId:"vetrix7-1d0cd"
+ apiKey:"AIzaSy...",
+ databaseURL:"https://vetrix7-1d0cd-default-rtdb.firebaseio.com"
 };
-
 firebase.initializeApp(firebaseConfig);
 const db=firebase.database();
 
-// AUTO LOGIN
-const saved=localStorage.getItem("key");
-if(saved) validar(saved);
-
+// LOGIN
 function entrar(){
-  const key=document.getElementById("keyInput").value;
-  validar(key);
-}
+  const key=keyInput.value;
 
-function validar(key){
   db.ref("keys").once("value").then(snap=>{
     let ok=false;
 
     snap.forEach(s=>{
       const k=s.val();
-
       if(k.key===key){
-        const now=new Date();
-        const exp=new Date(k.expiresAt);
-
-        if(now<=exp){
-          ok=true;
-
-          localStorage.setItem("key",key);
-
-          document.getElementById("login").style.display="none";
-          document.getElementById("panel").style.display="block";
-
-          document.getElementById("status").innerText=
-            "Ativa até "+exp.toLocaleDateString();
-
-          return true;
-        }
+        ok=true;
+        login.style.display="none";
+        panel.style.display="block";
       }
     });
 
-    if(!ok) document.getElementById("msg").innerText="Key inválida";
+    if(!ok) msg.innerText="Key inválida";
   });
 }
 
-// TABS
+// UI
 function trocar(i){
   document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
   document.querySelectorAll(".tab-content").forEach(c=>c.classList.remove("active"));
@@ -274,28 +320,19 @@ function trocar(i){
   document.querySelectorAll(".tab-content")[i].classList.add("active");
 }
 
-// UI
-function fpsUpdate(){
-  fpsTxt.innerText=fps.value+" FPS";
-}
-
-function delayUpdate(){
-  delayTxt.innerText=delay.value+"%";
+function updateFov(){
+  fovTxt.innerText="Valor: "+fov.value;
 }
 
 function apply(){
-  alert("Config aplicada!");
+  alert("Aplicado!");
 }
 
 function abrirFF(){
   window.location.href="freefire://";
-  setTimeout(()=>{
-    window.location.href="https://apps.apple.com/app/free-fire/id1300146617";
-  },2000);
 }
 
 function logout(){
-  localStorage.removeItem("key");
   location.reload();
 }
 </script>
